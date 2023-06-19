@@ -16,7 +16,6 @@
 		04983EDF2A3FB7F500E1F5EB /* ExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EDE2A3FB7F500E1F5EB /* ExplorerUITests.swift */; };
 		04983EE12A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EE02A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift */; };
 		04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */; };
-		04983EF12A3FD2F400E1F5EB /* LocationIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EF02A3FD2F400E1F5EB /* LocationIconView.swift */; };
 		049FD4792A40EA8700C9AF4F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD4782A40EA8700C9AF4F /* MapView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +51,6 @@
 		04983EE02A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		04983EED2A3FCD0400E1F5EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
-		04983EF02A3FD2F400E1F5EB /* LocationIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIconView.swift; sourceTree = "<group>"; };
 		049FD4782A40EA8700C9AF4F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,7 +110,6 @@
 				04983EC82A3FB7F500E1F5EB /* Explorer.entitlements */,
 				04983EC92A3FB7F500E1F5EB /* Preview Content */,
 				04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */,
-				04983EF02A3FD2F400E1F5EB /* LocationIconView.swift */,
 				049FD4782A40EA8700C9AF4F /* MapView.swift */,
 			);
 			path = Explorer;
@@ -277,7 +274,6 @@
 				049FD4792A40EA8700C9AF4F /* MapView.swift in Sources */,
 				04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */,
 				04983EC12A3FB7F300E1F5EB /* ExplorerApp.swift in Sources */,
-				04983EF12A3FD2F400E1F5EB /* LocationIconView.swift in Sources */,
 				04983EC52A3FB7F300E1F5EB /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

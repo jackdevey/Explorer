@@ -196,22 +196,8 @@ struct ContentView: View {
             if let location = location {
                 VStack(spacing: 15) {
                     HStack(alignment: .center) {
-                        // Show a nice image
-                        ZStack {
-                            Circle()
-                                .fill(.blue.gradient)
-                                .frame(width: 25, height: 25)
-                            Image(systemName: "airplane")
-                        }
-                        // Show name & address line
-                        VStack(alignment: .leading) {
-                            Text(location.name ?? "")
-                                .font(.headline)
-                                .lineLimit(1)
-                            Text(location.placemark.title ?? "")
-                                .font(.subheadline)
-                                .lineLimit(1)
-                        }
+                        // Cheaply re-use the location list view
+                        LocationListView(location: location)
                         Spacer()
                         // Open in Maps button
                         Button {
@@ -233,6 +219,9 @@ struct ContentView: View {
                     .mapControls {
                         MapZoomStepper()
                     }
+                    #endif
+                    #if os(iOS)
+                    .frame(height: 200)
                     #endif
                     .onChange(of: location) {
                         position = .automatic

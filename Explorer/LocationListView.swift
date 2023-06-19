@@ -15,39 +15,16 @@ struct LocationListView: View {
     var body: some View {
             HStack {
                 ZStack {
-                    switch location.pointOfInterestCategory {
-                    case MKPointOfInterestCategory.restaurant:
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(.orange.gradient)
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(categoryColor(category: location.pointOfInterestCategory).gradient)
 #if os(iOS)
-                            .frame(width: 40, height: 40)
+                        .frame(width: 40, height: 40)
 #endif
 #if os(macOS)
-                            .frame(width: 30, height: 30)
+                        .frame(width: 30, height: 30)
 #endif
-                        Image(systemName: "fork.knife")
-                    case MKPointOfInterestCategory.cafe:
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(.yellow.gradient)
-#if os(iOS)
-                            .frame(width: 40, height: 40)
-#endif
-#if os(macOS)
-                            .frame(width: 30, height: 30)
-#endif
-                        Image(systemName: "cup.and.saucer.fill")
-                    default:
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(.gray.gradient)
-#if os(iOS)
-                            .frame(width: 40, height: 40)
-#endif
-#if os(macOS)
-                            .frame(width: 30, height: 30)
-#endif
-                        Image(systemName: "questionmark")
-                    }
-                    
+                    Image(systemName: categoryIcon(category: location.pointOfInterestCategory))
+                        .foregroundStyle(.white)
                 }
                 VStack(alignment: .leading) {
                     Text(location.name ?? "")
@@ -60,5 +37,27 @@ struct LocationListView: View {
                 .padding([.leading, .trailing], 5)
             }
         }
+    
+    func categoryColor(category: MKPointOfInterestCategory?) -> Color {
+        switch(category) {
+        case MKPointOfInterestCategory.restaurant:
+            return .orange
+        case MKPointOfInterestCategory.cafe:
+            return .yellow
+        default:
+            return .gray
+        }
+    }
+    
+    func categoryIcon(category: MKPointOfInterestCategory?) -> String {
+        switch(category) {
+        case MKPointOfInterestCategory.restaurant:
+            return "fork.knife"
+        case MKPointOfInterestCategory.cafe:
+            return "cup.and.saucer.fill"
+        default:
+            return "questionmark.square.dashed"
+        }
+    }
     
 }
