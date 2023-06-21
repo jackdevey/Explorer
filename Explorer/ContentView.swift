@@ -73,7 +73,7 @@ struct ContentView: View {
                 if (type != nil) {
                     ScrollViewReader { content in
                         List(locationDelegate.searchResults, id: \.self, selection: $location) { result in
-                            LocationListView(location: result).tag(result)
+                            LocationListView(location: result).tag(result).id(result)
                         }
                         .navigationTitle(type?.name ?? "")
 #if os(iOS)
@@ -84,7 +84,9 @@ struct ContentView: View {
                             ToolbarItem {
                                 Button {
                                     location = locationDelegate.searchResults.randomElement()
-                                    content.scrollTo(location)
+                                    withAnimation {
+                                        content.scrollTo(location, anchor: .center)
+                                    }
                                 } label: {
                                     Label("Random", systemImage: "dice")
                                 }
@@ -94,6 +96,57 @@ struct ContentView: View {
                 }
             } detail: {
                 if let location = location {
+#if os(iOS)
+                    List {
+                        Section {
+                            HStack(alignment: .center) {
+                                // Cheaply re-use the location list view
+                                LocationListView(location: location)
+                                Spacer()
+                                // Open in Maps button
+                                //                                Button {
+                                //                                    location.openInMaps()
+                                //                                } label: {
+                                //                                    Label("Open in Maps", systemImage: "location.fill")
+                                //                                }
+                            }
+                            Map(position: $position, bounds: MapCameraBounds(minimumDistance: 100.0)) {
+                                Marker(location.name ?? "", coordinate: location.placemark.coordinate)
+                                    .tint(categoryColor(category: location.pointOfInterestCategory))
+                            }
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets())
+                            .frame(height: 200)
+                            .onChange(of: location) {
+                                position = .automatic
+                            }
+                        } header: {
+                            Text("Overview")
+                        }
+                        Section {
+                            // Show phone number
+                            if let phoneNumber = location.phoneNumber {
+                                HStack {
+                                    Text("Phone Number")
+                                    Spacer()
+                                    Text(phoneNumber)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                            // Show URL
+                            if let url = location.url {
+                                HStack {
+                                    Text("Website")
+                                    Spacer()
+                                    Link("Open Link", destination: url)
+                                }
+                            }
+                        } header: {
+                            Text("Details")
+                        }
+                    }
+#endif
+#if os(macOS)
                     VStack(spacing: 15) {
                         HStack(alignment: .center) {
                             // Cheaply re-use the location list view
@@ -105,9 +158,7 @@ struct ContentView: View {
                             } label: {
                                 Label("Open in Maps", systemImage: "location.fill")
                             }
-#if os(macOS)
                             .buttonStyle(.link)
-#endif
                         }
                         
                         Map(position: $position, bounds: MapCameraBounds(minimumDistance: 100.0)) {
@@ -115,23 +166,35 @@ struct ContentView: View {
                                 .tint(categoryColor(category: location.pointOfInterestCategory))
                         }
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-#if os(macOS)
                         .mapControls {
                             MapZoomStepper()
                         }
                         .frame(height: 350)
-#endif
-#if os(iOS)
-                        .frame(height: 200)
-#endif
                         .onChange(of: location) {
                             position = .automatic
                         }
                         
+                        // Show phone number
+                        if let phoneNumber = location.phoneNumber {
+                            HStack {
+                                Text("Phone Number")
+                                Spacer()
+                                Text(phoneNumber)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        // Show URL
+                        if let url = location.url {
+                            HStack {
+                                Text("Website")
+                                Spacer()
+                                Link("Open Link", destination: url)
+                            }
+                        }
                         Spacer()
-                        Text("ho")
                     }
                     .padding()
+#endif
                 }
             }
     }
