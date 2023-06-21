@@ -38,26 +38,26 @@ struct LocationListView: View {
             }
         }
     
-    func categoryColor(category: MKPointOfInterestCategory?) -> Color {
-        switch(category) {
-        case MKPointOfInterestCategory.restaurant:
-            return .orange
-        case MKPointOfInterestCategory.cafe:
-            return .yellow
-        default:
-            return .gray
-        }
+}
+
+func categoryColor(category: MKPointOfInterestCategory?) -> Color {
+    switch(category) {
+    case MKPointOfInterestCategory.restaurant:
+        return .orange
+    case MKPointOfInterestCategory.cafe:
+        return .yellow
+    default:
+        return .gray
     }
-    
-    func categoryIcon(category: MKPointOfInterestCategory?) -> String {
-        switch(category) {
-        case MKPointOfInterestCategory.restaurant:
-            return "fork.knife"
-        case MKPointOfInterestCategory.cafe:
-            return "cup.and.saucer.fill"
-        default:
-            return "questionmark.square.dashed"
-        }
+}
+
+func categoryIcon(category: MKPointOfInterestCategory?) -> String {
+    switch(category) {
+    case MKPointOfInterestCategory.restaurant:
+        return "fork.knife"
+    case MKPointOfInterestCategory.cafe:
+        return "cup.and.saucer.fill"
+    default:
+        return "questionmark"
     }
-    
 }
