@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct ListType: Identifiable, Hashable {
     let id = UUID()
     let icon: String
     let name: String
     let searchTerm: String
+    let color: Color
 }

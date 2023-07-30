@@ -16,14 +16,9 @@ struct LocationListView: View {
             HStack {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(categoryColor(category: location.pointOfInterestCategory).gradient)
-#if os(iOS)
+                        .fill(categoryIconColourPair(category: location.pointOfInterestCategory).1)
                         .frame(width: 40, height: 40)
-#endif
-#if os(macOS)
-                        .frame(width: 30, height: 30)
-#endif
-                    Image(systemName: categoryIcon(category: location.pointOfInterestCategory))
+                    Image(systemName: categoryIconColourPair(category: location.pointOfInterestCategory).0)
                         .foregroundStyle(.white)
                 }
                 VStack(alignment: .leading) {
@@ -40,24 +35,58 @@ struct LocationListView: View {
     
 }
 
-func categoryColor(category: MKPointOfInterestCategory?) -> Color {
+func categoryIconColourPair(category: MKPointOfInterestCategory?) -> (String, Color) {
     switch(category) {
-    case MKPointOfInterestCategory.restaurant:
-        return .orange
+        
+    case MKPointOfInterestCategory.airport:
+        return ("airplane.departure", .blue)
+        
+    case MKPointOfInterestCategory.amusementPark:
+        return ("Star", .pink)
+        
+    case MKPointOfInterestCategory.aquarium:
+        return ("fish.fill", .blue)
+        
+    case MKPointOfInterestCategory.atm:
+        return ("sterlingsign.square", .green)
+        
+    case MKPointOfInterestCategory.bakery:
+        return ("birthday.cake", .brown)
+        
+    case MKPointOfInterestCategory.bank:
+        return ("building.columns.fill", .green)
+        
+    case MKPointOfInterestCategory.beach:
+        return ("beach.umbrella.fill", .yellow)
+        
+    case MKPointOfInterestCategory.brewery:
+        return ("wineglass", .brown)
+        
     case MKPointOfInterestCategory.cafe:
-        return .yellow
-    default:
-        return .gray
-    }
-}
-
-func categoryIcon(category: MKPointOfInterestCategory?) -> String {
-    switch(category) {
+        return ("cup.and.saucer.fill", .yellow)
+        
+    case MKPointOfInterestCategory.nationalPark:
+        return ("mountain.2.fill", .green)
+        
+    case MKPointOfInterestCategory.park:
+        return ("tree.fill", .green)
+        
+    case MKPointOfInterestCategory.store:
+        return ("bag.fill", .purple)
+        
+    case MKPointOfInterestCategory.fitnessCenter:
+        return ("figure.run", .teal)
+        
+    case MKPointOfInterestCategory.nightlife:
+        return ("moon.stars.fill", .brown)
+        
+    case MKPointOfInterestCategory.movieTheater:
+        return ("popcorn.fill", .red)
+        
     case MKPointOfInterestCategory.restaurant:
-        return "fork.knife"
-    case MKPointOfInterestCategory.cafe:
-        return "cup.and.saucer.fill"
+        return ("fork.knife", .orange)
+        
     default:
-        return "questionmark"
+        return ("questionmark", .gray)
     }
 }

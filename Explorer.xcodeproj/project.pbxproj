@@ -17,6 +17,8 @@
 		04983EE12A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EE02A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift */; };
 		04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */; };
 		049FD4792A40EA8700C9AF4F /* ListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD4782A40EA8700C9AF4F /* ListType.swift */; };
+		04C3439B2A75E7FF000E07F6 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */; };
+		04C3439D2A75E849000E07F6 /* ListTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C3439C2A75E849000E07F6 /* ListTypeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		04983EED2A3FCD0400E1F5EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		049FD4782A40EA8700C9AF4F /* ListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListType.swift; sourceTree = "<group>"; };
+		04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
+		04C3439C2A75E849000E07F6 /* ListTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTypeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0431C5652A76B57200AD30CD /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		04983EB42A3FB7F300E1F5EB = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +113,7 @@
 		04983EBF2A3FB7F300E1F5EB /* Explorer */ = {
 			isa = PBXGroup;
 			children = (
+				0431C5652A76B57200AD30CD /* Category */,
 				04983EED2A3FCD0400E1F5EB /* Info.plist */,
 				04983EC02A3FB7F300E1F5EB /* ExplorerApp.swift */,
 				04983EC22A3FB7F300E1F5EB /* Item.swift */,
@@ -111,6 +123,8 @@
 				04983EC92A3FB7F500E1F5EB /* Preview Content */,
 				04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */,
 				049FD4782A40EA8700C9AF4F /* ListType.swift */,
+				04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */,
+				04C3439C2A75E849000E07F6 /* ListTypeView.swift */,
 			);
 			path = Explorer;
 			sourceTree = "<group>";
@@ -271,6 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				04983EC32A3FB7F300E1F5EB /* Item.swift in Sources */,
+				04C3439D2A75E849000E07F6 /* ListTypeView.swift in Sources */,
+				04C3439B2A75E7FF000E07F6 /* LocationDelegate.swift in Sources */,
 				049FD4792A40EA8700C9AF4F /* ListType.swift in Sources */,
 				04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */,
 				04983EC12A3FB7F300E1F5EB /* ExplorerApp.swift in Sources */,
@@ -363,6 +379,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -418,6 +435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -442,7 +460,7 @@
 				INFOPLIST_FILE = Explorer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Explorer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Hello;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To show nearby locations in app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -486,7 +504,7 @@
 				INFOPLIST_FILE = Explorer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Explorer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Hello;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To show nearby locations in app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

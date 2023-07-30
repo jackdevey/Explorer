@@ -2,178 +2,87 @@ import SwiftUI
 import MapKit
 import CoreLocation
 
-class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
-    let locationManager = CLLocationManager()
-    @Published var searchResults: [MKMapItem] = []
-
-    override init() {
-        super.init()
-        locationManager.delegate = self
-    }
-
-    func requestLocationPermission() {
-        locationManager.requestAlwaysAuthorization()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
-        let authorised = status == .authorizedAlways
-        
-        if authorised {
-            manager.startUpdatingLocation()
-        }
-    }
-    
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let userLocation = locations.last else { return }
-
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "Food and Drink"
-        request.region = MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-
-        let search = MKLocalSearch(request: request)
-        search.start { (response, error) in
-            guard let response = response else {
-                if let error = error {
-                    print("Error: \(error)")
-                }
-                return
-            }
-            DispatchQueue.main.async {
-                self.searchResults = response.mapItems
-            }
-        }
-
-        manager.stopUpdatingLocation()
-    }
-}
-
 struct ContentView: View {
     @StateObject private var locationDelegate = LocationDelegate()
         
-    @State private var types: [ListType] = [ListType(icon: "fork.knife.circle", name: "Food & Drink", searchTerm: "Food & Drink")]
+    @State private var types: [ListType] = [
+        ListType(icon: "fork.knife", name: "Food & Drink", searchTerm: "Food & Drink", color: .orange),
+        ListType(icon: "star.fill", name: "Entertainment", searchTerm: "Entertainment", color: .red)
+    ]
     @State private var type: ListType?
     
     
     @State private var location: MKMapItem?
     @State private var position: MapCameraPosition = .automatic
+    @State private var isLookingAround: Bool = false
+    
+    @State private var path = NavigationPath()
 
     var body: some View {
-            NavigationSplitView {
-                List(types, selection: $type) { type in
-                    Label(type.name, systemImage: type.icon).tag(type)
-                }
-                .navigationTitle("Category")
-#if os(iOS)
-                .navigationBarTitleDisplayMode(.large)
-#endif
-                
-            } content: {
-                if (type != nil) {
-                    ScrollViewReader { content in
-                        List(locationDelegate.searchResults, id: \.self, selection: $location) { result in
-                            LocationListView(location: result).tag(result).id(result)
-                        }
-                        .navigationTitle(type?.name ?? "")
-#if os(iOS)
-                        .listStyle(.insetGrouped)
-                        .navigationBarTitleDisplayMode(.large)
-#endif
-                        .toolbar {
-                            ToolbarItem {
-                                Button {
-                                    location = locationDelegate.searchResults.randomElement()
-                                    withAnimation {
-                                        content.scrollTo(location, anchor: .center)
-                                    }
-                                } label: {
-                                    Label("Random", systemImage: "dice")
+        
+        
+        NavigationStack(path: $path) {
+            List {
+                Section {
+                    ForEach(types) { type in
+                        NavigationLink(value: type) {
+                            HStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(type.color.gradient)
+                                        .frame(width: 40, height: 40)
+                                    Image(systemName: type.icon)
+                                        .foregroundStyle(.white)
                                 }
-                            }
-                        }
-                    }
-                }
-            } detail: {
-                if let location = location {
-#if os(iOS)
-                    List {
-                        Section {
-                            HStack(alignment: .center) {
-                                // Cheaply re-use the location list view
-                                LocationListView(location: location)
-                                Spacer()
-                                // Open in Maps button
-                                //                                Button {
-                                //                                    location.openInMaps()
-                                //                                } label: {
-                                //                                    Label("Open in Maps", systemImage: "location.fill")
-                                //                                }
-                            }
-                            Map(position: $position, bounds: MapCameraBounds(minimumDistance: 100.0)) {
-                                Marker(location.name ?? "", coordinate: location.placemark.coordinate)
-                                    .tint(categoryColor(category: location.pointOfInterestCategory))
-                            }
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets())
-                            .frame(height: 200)
-                            .onChange(of: location) {
-                                position = .automatic
-                            }
-                        } header: {
-                            Text("Overview")
-                        }
-                        Section {
-                            // Show phone number
-                            if let phoneNumber = location.phoneNumber {
-                                HStack {
-                                    Text("Phone Number")
-                                    Spacer()
-                                    Text(phoneNumber)
+                                VStack(alignment: .leading) {
+                                    Text(type.name)
+                                        .lineLimit(1)
+                                        .bold()
+                                    Text(type.icon)
                                         .foregroundStyle(.secondary)
+                                        .lineLimit(1)
                                 }
+                                .padding([.leading, .trailing], 5)
                             }
-                            // Show URL
-                            if let url = location.url {
-                                HStack {
-                                    Text("Website")
-                                    Spacer()
-                                    Link("Open Link", destination: url)
-                                }
-                            }
-                        } header: {
-                            Text("Details")
                         }
                     }
-#endif
-#if os(macOS)
-                    VStack(spacing: 15) {
+                } header: {
+                    Text("Categories")
+                }
+            }
+            .navigationTitle("Explorer")
+            .onAppear {
+                locationDelegate.requestLocationPermission()
+            }
+            
+            .navigationDestination(for: ListType.self) { type in
+                ListTypeView(path: $path, type: type)
+                    .environmentObject(locationDelegate)
+                    .onAppear {
+                        locationDelegate.startUpdatingLocation(for: type)
+                    }
+            }
+            
+            .navigationDestination(for: MKMapItem.self) { location in
+                List {
+                    Section {
                         HStack(alignment: .center) {
                             // Cheaply re-use the location list view
                             LocationListView(location: location)
                             Spacer()
-                            // Open in Maps button
-                            Button {
-                                location.openInMaps()
-                            } label: {
-                                Label("Open in Maps", systemImage: "location.fill")
-                            }
-                            .buttonStyle(.link)
                         }
-                        
                         Map(position: $position, bounds: MapCameraBounds(minimumDistance: 100.0)) {
                             Marker(location.name ?? "", coordinate: location.placemark.coordinate)
-                                .tint(categoryColor(category: location.pointOfInterestCategory))
+                                .tint(categoryIconColourPair(category: location.pointOfInterestCategory).1)
                         }
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .mapControls {
-                            MapZoomStepper()
-                        }
-                        .frame(height: 350)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
+                        .frame(height: 200)
                         .onChange(of: location) {
                             position = .automatic
                         }
-                        
+                    }
+                    Section {
                         // Show phone number
                         if let phoneNumber = location.phoneNumber {
                             HStack {
@@ -191,12 +100,45 @@ struct ContentView: View {
                                 Link("Open Link", destination: url)
                             }
                         }
-                        Spacer()
+                    } header: {
+                        Text("Details")
                     }
-                    .padding()
-#endif
+                }
+                .navigationTitle(location.name ?? "Error")
+                .lookAroundViewer(isPresented: $isLookingAround, initialScene: nil)
+                .toolbar {
+                    
+                    ToolbarItem {
+                        // Open in Maps button
+                        Button {
+                            isLookingAround = true
+                        } label: {
+                            Label("Look around", systemImage: "binoculars")
+                        }
+                    }
+                    
+                    ToolbarItem {
+                        // Open in Maps button
+                        Button {
+                            location.openInMaps()
+                        } label: {
+                            Label("Open in Maps", systemImage: "location")
+                        }
+                    }
+                    
+                    ToolbarItem {
+                        Button {
+                            withAnimation {
+                                path.removeLast()
+                                path.append(locationDelegate.searchResults.randomElement()!)
+                            }
+                        } label: {
+                            Label("Random", systemImage: "dice")
+                        }
+                    }
                 }
             }
+        }
     }
     
     private func region(for mapItem: MKMapItem) -> MKCoordinateRegion {
