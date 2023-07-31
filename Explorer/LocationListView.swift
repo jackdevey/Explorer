@@ -16,8 +16,8 @@ struct LocationListView: View {
             HStack {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(categoryIconColourPair(category: location.pointOfInterestCategory).1)
-                        .frame(width: 40, height: 40)
+                        .fill(categoryIconColourPair(category: location.pointOfInterestCategory).1.gradient)
+                        .frame(width: 35, height: 35)
                     Image(systemName: categoryIconColourPair(category: location.pointOfInterestCategory).0)
                         .foregroundStyle(.white)
                 }

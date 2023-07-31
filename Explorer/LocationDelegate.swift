@@ -10,7 +10,7 @@ class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var searchResults: [MKMapItem] = []
     
     @Published var state: LoadableState = .idle
-    @Published var type: ListType?
+    @Published var type: Category?
 
     override init() {
         super.init()
@@ -21,16 +21,12 @@ class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.requestAlwaysAuthorization()
     }
 
-    func startUpdatingLocation(for type: ListType) {
+    func startUpdatingLocation(for type: Category) {
         
-        if self.type == type {
-            self.state = .loaded
-        } else {
-            self.type = type
-            self.locationManager.startUpdatingLocation()
-            self.searchResults = []
-            self.state = .loading
-        }
+        self.type = type
+        self.locationManager.startUpdatingLocation()
+        self.searchResults = []
+        self.state = .loading
 
     }
 
@@ -67,6 +63,12 @@ class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         
         manager.stopUpdatingLocation()
+    }
+    
+    func findSimilarLocations(to existingLocation: MKMapItem) -> ArraySlice<MKMapItem> {
+        searchResults.filter { location in
+            location.pointOfInterestCategory == existingLocation.pointOfInterestCategory && location != existingLocation
+        }.prefix(3)
     }
 }
 

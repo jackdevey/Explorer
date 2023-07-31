@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0481D4E12A77CC2C00B141D1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4E02A77CC2C00B141D1 /* SettingsView.swift */; };
+		0481D4E42A77D46C00B141D1 /* ExplorerPlusSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4E32A77D46C00B141D1 /* ExplorerPlusSubscriptionView.swift */; };
+		0481D4E62A77DE1F00B141D1 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4E52A77DE1F00B141D1 /* PurchaseManager.swift */; };
+		0481D4E82A77EFB200B141D1 /* ExplorerPlusBenefitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4E72A77EFB200B141D1 /* ExplorerPlusBenefitsView.swift */; };
+		0481D4EB2A77F69700B141D1 /* DefaultCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4EA2A77F69700B141D1 /* DefaultCategories.swift */; };
+		0481D4ED2A78313800B141D1 /* CategoryLocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4EC2A78313800B141D1 /* CategoryLocationListView.swift */; };
+		0481D4F22A78388500B141D1 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0481D4F12A78388500B141D1 /* ScalingHeaderScrollView */; };
 		04983EC12A3FB7F300E1F5EB /* ExplorerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EC02A3FB7F300E1F5EB /* ExplorerApp.swift */; };
 		04983EC32A3FB7F300E1F5EB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EC22A3FB7F300E1F5EB /* Item.swift */; };
 		04983EC52A3FB7F300E1F5EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EC42A3FB7F300E1F5EB /* ContentView.swift */; };
@@ -16,7 +23,7 @@
 		04983EDF2A3FB7F500E1F5EB /* ExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EDE2A3FB7F500E1F5EB /* ExplorerUITests.swift */; };
 		04983EE12A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EE02A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift */; };
 		04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */; };
-		049FD4792A40EA8700C9AF4F /* ListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD4782A40EA8700C9AF4F /* ListType.swift */; };
+		049FD4792A40EA8700C9AF4F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD4782A40EA8700C9AF4F /* Category.swift */; };
 		04C3439B2A75E7FF000E07F6 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */; };
 		04C3439D2A75E849000E07F6 /* ListTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C3439C2A75E849000E07F6 /* ListTypeView.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0481D4E02A77CC2C00B141D1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0481D4E32A77D46C00B141D1 /* ExplorerPlusSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerPlusSubscriptionView.swift; sourceTree = "<group>"; };
+		0481D4E52A77DE1F00B141D1 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		0481D4E72A77EFB200B141D1 /* ExplorerPlusBenefitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerPlusBenefitsView.swift; sourceTree = "<group>"; };
+		0481D4EA2A77F69700B141D1 /* DefaultCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategories.swift; sourceTree = "<group>"; };
+		0481D4EC2A78313800B141D1 /* CategoryLocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLocationListView.swift; sourceTree = "<group>"; };
 		04983EBD2A3FB7F300E1F5EB /* Explorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Explorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04983EC02A3FB7F300E1F5EB /* ExplorerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerApp.swift; sourceTree = "<group>"; };
 		04983EC22A3FB7F300E1F5EB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -53,7 +66,7 @@
 		04983EE02A3FB7F500E1F5EB /* ExplorerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		04983EED2A3FCD0400E1F5EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
-		049FD4782A40EA8700C9AF4F /* ListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListType.swift; sourceTree = "<group>"; };
+		049FD4782A40EA8700C9AF4F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		04C3439C2A75E849000E07F6 /* ListTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTypeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0481D4F22A78388500B141D1 /* ScalingHeaderScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,11 +97,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0431C5652A76B57200AD30CD /* Category */ = {
+		0481D4E22A77D45F00B141D1 /* Explorer+ */ = {
 			isa = PBXGroup;
 			children = (
+				0481D4E32A77D46C00B141D1 /* ExplorerPlusSubscriptionView.swift */,
+				0481D4E52A77DE1F00B141D1 /* PurchaseManager.swift */,
+				0481D4E72A77EFB200B141D1 /* ExplorerPlusBenefitsView.swift */,
 			);
-			path = Category;
+			path = "Explorer+";
+			sourceTree = "<group>";
+		};
+		0481D4E92A77F68000B141D1 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				049FD4782A40EA8700C9AF4F /* Category.swift */,
+				0481D4EA2A77F69700B141D1 /* DefaultCategories.swift */,
+				0481D4EC2A78313800B141D1 /* CategoryLocationListView.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		04983EB42A3FB7F300E1F5EB = {
@@ -113,7 +140,8 @@
 		04983EBF2A3FB7F300E1F5EB /* Explorer */ = {
 			isa = PBXGroup;
 			children = (
-				0431C5652A76B57200AD30CD /* Category */,
+				0481D4E92A77F68000B141D1 /* Categories */,
+				0481D4E22A77D45F00B141D1 /* Explorer+ */,
 				04983EED2A3FCD0400E1F5EB /* Info.plist */,
 				04983EC02A3FB7F300E1F5EB /* ExplorerApp.swift */,
 				04983EC22A3FB7F300E1F5EB /* Item.swift */,
@@ -122,9 +150,9 @@
 				04983EC82A3FB7F500E1F5EB /* Explorer.entitlements */,
 				04983EC92A3FB7F500E1F5EB /* Preview Content */,
 				04983EEE2A3FCEA200E1F5EB /* LocationListView.swift */,
-				049FD4782A40EA8700C9AF4F /* ListType.swift */,
 				04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */,
 				04C3439C2A75E849000E07F6 /* ListTypeView.swift */,
+				0481D4E02A77CC2C00B141D1 /* SettingsView.swift */,
 			);
 			path = Explorer;
 			sourceTree = "<group>";
@@ -170,6 +198,9 @@
 			dependencies = (
 			);
 			name = Explorer;
+			packageProductDependencies = (
+				0481D4F12A78388500B141D1 /* ScalingHeaderScrollView */,
+			);
 			productName = Explorer;
 			productReference = 04983EBD2A3FB7F300E1F5EB /* Explorer.app */;
 			productType = "com.apple.product-type.application";
@@ -242,6 +273,9 @@
 				Base,
 			);
 			mainGroup = 04983EB42A3FB7F300E1F5EB;
+			packageReferences = (
+				0481D4F02A78388400B141D1 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
+			);
 			productRefGroup = 04983EBE2A3FB7F300E1F5EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -285,10 +319,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				04983EC32A3FB7F300E1F5EB /* Item.swift in Sources */,
+				0481D4E12A77CC2C00B141D1 /* SettingsView.swift in Sources */,
+				0481D4E42A77D46C00B141D1 /* ExplorerPlusSubscriptionView.swift in Sources */,
 				04C3439D2A75E849000E07F6 /* ListTypeView.swift in Sources */,
+				0481D4E82A77EFB200B141D1 /* ExplorerPlusBenefitsView.swift in Sources */,
+				0481D4ED2A78313800B141D1 /* CategoryLocationListView.swift in Sources */,
+				0481D4E62A77DE1F00B141D1 /* PurchaseManager.swift in Sources */,
 				04C3439B2A75E7FF000E07F6 /* LocationDelegate.swift in Sources */,
-				049FD4792A40EA8700C9AF4F /* ListType.swift in Sources */,
+				049FD4792A40EA8700C9AF4F /* Category.swift in Sources */,
 				04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */,
+				0481D4EB2A77F69700B141D1 /* DefaultCategories.swift in Sources */,
 				04983EC12A3FB7F300E1F5EB /* ExplorerApp.swift in Sources */,
 				04983EC52A3FB7F300E1F5EB /* ContentView.swift in Sources */,
 			);
@@ -661,6 +701,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0481D4F02A78388400B141D1 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0481D4F12A78388500B141D1 /* ScalingHeaderScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0481D4F02A78388400B141D1 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */;
+			productName = ScalingHeaderScrollView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 04983EB52A3FB7F300E1F5EB /* Project object */;
 }

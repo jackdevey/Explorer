@@ -10,7 +10,7 @@ import SwiftUI
 struct ListTypeView: View {
     
     @Binding var path: NavigationPath
-    var type: ListType
+    var type: Category
     @EnvironmentObject var locationDelegate: LocationDelegate
     
     var body: some View {

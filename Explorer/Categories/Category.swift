@@ -8,10 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct ListType: Identifiable, Hashable {
+struct Category: Identifiable, Hashable {
     let id = UUID()
     let icon: String
     let name: String
-    let searchTerm: String
+    let searchTerms: [String]
     let color: Color
+    
+    var searchTerm: String {
+        searchTerms.randomElement()!
+    }
 }
