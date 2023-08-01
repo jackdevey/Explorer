@@ -5,9 +5,8 @@ import CoreLocation
 struct ContentView: View {
     
     @EnvironmentObject private var purchaseManager: PurchaseManager
-    
-    @StateObject private var locationDelegate = LocationDelegate()
-        
+    @EnvironmentObject private var locationDelegate: LocationDelegate
+            
     @State private var type: Category?
     
     
@@ -29,99 +28,101 @@ struct ContentView: View {
             ScrollView(.vertical) {
                 LazyVStack(alignment: .leading) {
                     
-                    VStack {
-                        NavigationLink {
-                            Grid {
-                                Text("s")
-                                Text("s")
-                                Text("s")
-                            }
-                            .navigationTitle("Top Categories")
-                            .navigationBarTitleDisplayMode(.inline)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text("Top Categories")
-                                        .foregroundStyle(Color.primary)
-                                        .font(.title2)
-                                        .bold()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundStyle(Color.secondary)
-                                        .bold()
-                                }
-                                Text("Popular right now")
-                                    .foregroundStyle(Color.secondary)
-                            }
-                        }
+                    // Top categories
+                    
+                    HorizontalListView(
+                        defaultCategories,
+                        title: "Top Categories",
+                        subtitle: "Popular right now"
+                    ) { category in
                         
-                    }
-                    .padding([.horizontal], 20)
-                    
-                    ScrollView(.horizontal) {
-                        LazyHStack {
-                            ForEach(defaultCategories) { type in
-                                NavigationLink(value: type) {
-                                    RoundedRectangle(cornerRadius: 11)
-                                        .fill(type.color.gradient)
-                                        .frame(width: 250, height: 150)
-                                        .overlay {
-                                            HStack(alignment: .bottom) {
-                                                VStack(alignment: .leading) {
-                                                    Image(systemName: type.icon)
-                                                        .imageScale(.large)
-                                                    Spacer()
-                                                    Text(type.name)
-                                                        .font(.title)
-                                                        .lineLimit(1)
-                                                        .bold()
-                                                }
-                                                Spacer()
-                                            }
-                                            .padding()
-                                            .foregroundStyle(.white)
-                                        }
+                        NavigationLink {
+                            ListTypeView(path: $path, type: category)
+                                .onAppear {
+                                    locationDelegate.startUpdatingLocation(for: category)
                                 }
-                            }
-                        }
-                        .scrollTargetLayout()
-                        .padding([.horizontal], 20)
-                    }
-                    .scrollTargetBehavior(.viewAligned)
-                    .scrollIndicators(.hidden)
-                    
-                    
-           
-                    VStack(alignment: .leading) { // Your original VStack
-                        ForEach(defaultCategories) { type in
-                            NavigationLink(value: type) {
-                                HStack {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(type.color.gradient)
-                                            .frame(width: 40, height: 40)
-                                        Image(systemName: type.icon)
-                                            .foregroundStyle(.white)
-                                    }
+                        } label: {
+                            ZStack {
+                                // Cool background image
+                                Image(category.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(RoundedRectangle(cornerRadius: 11))
+                                
+                                // The text and icons
+                                HStack(alignment: .bottom) {
                                     VStack(alignment: .leading) {
-                                        Text(type.name)
+                                        Image(systemName: category.icon)
+                                            .imageScale(.large)
+                                        Spacer()
+                                        Text(category.name)
+                                            .font(.title)
                                             .lineLimit(1)
                                             .bold()
-                                        Text(type.icon)
-                                            .foregroundStyle(.secondary)
-                                            .lineLimit(1)
                                     }
-                                    .padding([.leading, .trailing], 5)
+                                    Spacer()
                                 }
-                            }
-                            .padding(0)
-                            
-                            if type.name != defaultCategories.last?.name {
-                                Divider()
-                                    .padding([.vertical], 5)
+                                .padding()
+                                .foregroundStyle(.white)
                             }
                         }
                     }
-                    .padding() // Add some padding to the whole view
+                    
+                    HorizontalScrollingGridView(
+                        MKPointOfInterestCategory.allCases,
+                        title: "Location Types",
+                        subtitle: "DONT WORRY WILL DELETE"
+                    ) { poiCategory in
+                        HStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(categoryIconColourPair(category: poiCategory).1.gradient)
+                                    .frame(width: 35, height: 35)
+                                Image(systemName: categoryIconColourPair(category: poiCategory).0)
+                                    .foregroundStyle(.white)
+                            }
+                            VStack(alignment: .leading) {
+                                Text(poiCategory.name)
+                                    .lineLimit(1)
+                                    .bold()
+                                
+                            }
+                            .padding([.leading, .trailing], 5)
+                            Spacer()
+                        }
+                    }
+           
+//                    VStack(alignment: .leading) { // Your original VStack
+//                        ForEach(defaultCategories) { type in
+//                            NavigationLink(value: type) {
+//                                HStack {
+//                                    ZStack {
+//                                        RoundedRectangle(cornerRadius: 8)
+//                                            .fill(type.color.gradient)
+//                                            .frame(width: 40, height: 40)
+//                                        Image(systemName: type.icon)
+//                                            .foregroundStyle(.white)
+//                                    }
+//                                    VStack(alignment: .leading) {
+//                                        Text(type.name)
+//                                            .lineLimit(1)
+//                                            .bold()
+//                                        Text(type.icon)
+//                                            .foregroundStyle(.secondary)
+//                                            .lineLimit(1)
+//                                    }
+//                                    .padding([.leading, .trailing], 5)
+//                                }
+//                            }
+//                            .padding(0)
+//                            
+//                            if type.name != defaultCategories.last?.name {
+//                                Divider()
+//                                    .padding([.vertical], 5)
+//                            }
+//                        }
+//                    }
+//                    .padding() // Add some padding to the whole view
 
                     
 //                    List {
@@ -179,94 +180,8 @@ struct ContentView: View {
                 ExplorerPlusSubscriptionView()
             }
             
-            .navigationDestination(for: Category.self) { type in
-                ListTypeView(path: $path, type: type)
-                    .environmentObject(locationDelegate)
-                    .onAppear {
-                        locationDelegate.startUpdatingLocation(for: type)
-                    }
-            }
-            
             .navigationDestination(for: MKMapItem.self) { location in
-                List {
-                    Section {
-                        Map(position: $position, bounds: MapCameraBounds(minimumDistance: 100.0)) {
-                            Marker(location.name ?? "", coordinate: location.placemark.coordinate)
-                                .tint(categoryIconColourPair(category: location.pointOfInterestCategory).1)
-                        }
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets())
-                        .frame(height: 250)
-                        .onChange(of: location) {
-                            position = .automatic
-                        }
-                    }
-                    Section {
-                        // Show phone number
-                        if let phoneNumber = location.phoneNumber {
-                            HStack {
-                                Text("Phone Number")
-                                Spacer()
-                                Text(phoneNumber)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-                        // Show URL
-                        if let url = location.url {
-                            HStack {
-                                Text("Website")
-                                Spacer()
-                                Link("Open Link", destination: url)
-                            }
-                        }
-                    } header: {
-                        Text("Details")
-                    }
-                    
-                    if location.pointOfInterestCategory != nil {
-                        Section {
-                            ForEach(locationDelegate.findSimilarLocations(to: location), id: \.self) { location in
-                                NavigationLink(value: location) {
-                                    LocationListView(location: location)
-                                }
-                            }
-                        } header: {
-                            Text("Similar")
-                        }
-                    }
-                }
-                .navigationTitle(location.name ?? "Error")
-                .lookAroundViewer(isPresented: $isLookingAround, initialScene: nil)
-                .toolbar {
-                    
-                    ToolbarItem {
-                        // Open in Maps button
-                        Button {
-                            isLookingAround = true
-                        } label: {
-                            Label("Look around", systemImage: "binoculars")
-                        }
-                    }
-                    
-                    ToolbarItem {
-                        // Open in Maps button
-                        Button {
-                            location.openInMaps()
-                        } label: {
-                            Label("Open in Maps", systemImage: "location")
-                        }
-                    }
-                    
-                    ToolbarItem {
-                        Button {
-                            withAnimation {
-                                path.append(locationDelegate.searchResults.randomElement()!)
-                            }
-                        } label: {
-                            Label("Random", systemImage: "dice")
-                        }
-                    }
-                }
+                LocationDetailView(location: location)
             }
         }
     }

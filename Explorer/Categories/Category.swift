@@ -14,6 +14,7 @@ struct Category: Identifiable, Hashable {
     let name: String
     let searchTerms: [String]
     let color: Color
+    let image: ImageResource
     
     var searchTerm: String {
         searchTerms.randomElement()!

@@ -14,18 +14,30 @@ struct ExplorerPlusSubscriptionView: View {
         
     var body: some View {
         SubscriptionStoreView(productIDs: purchaseManager.productIds) {
-            VStack {
-                Text("Explorer+")
-                    .font(.largeTitle)
-                    .fontWeight(.black)
-                
-                Text("Take your exploration journey to the next level by subscribing to Explorer+!")
-                    .multilineTextAlignment(.center)
+            VStack(alignment: .leading) {
+                ZStack {
+                    Image(.explorerPlusBackground)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Spacer()
+                            Text("Explorer+")
+                                .font(.largeTitle)
+                                .bold()
+                        }
+                        Spacer()
+                    }
+                    .foregroundStyle(.white)
+                    .padding()
+                }
+                .background(.explorerPlus)
+                Text("Take your exploration journey to the next level with Explorer+!")
+                    .foregroundStyle(.secondary)
                     .padding()
             }
-            .foregroundStyle(.white)
-            .containerBackground(.accent.gradient, for: .subscriptionStore)
         }
+        .containerBackground(.explorerPlus, for: .subscriptionStore)
         .storeButton(.visible, for: .restorePurchases, .cancellation)
         .subscriptionStoreControlStyle(.prominentPicker)
         .onInAppPurchaseStart { product in
@@ -34,5 +46,6 @@ struct ExplorerPlusSubscriptionView: View {
         .onInAppPurchaseCompletion { product, result in
             await purchaseManager.handlePurchaseCompletion(product: product, result: result)
         }
+        .tint(.explorerPlus)
     }
 }

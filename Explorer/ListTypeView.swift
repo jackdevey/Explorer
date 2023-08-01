@@ -25,9 +25,8 @@ struct ListTypeView: View {
         case .loaded:
             ScrollViewReader { content in
                 List(locationDelegate.searchResults, id: \.self) { result in
-                    NavigationLink(value: result) {
-                        LocationListView(location: result)
-                    }
+                    LocationListView(location: result)
+                    
                 }
                 .navigationTitle(type.name)
                 .toolbar {

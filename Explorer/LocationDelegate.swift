@@ -22,11 +22,14 @@ class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func startUpdatingLocation(for type: Category) {
-        
-        self.type = type
-        self.locationManager.startUpdatingLocation()
-        self.searchResults = []
-        self.state = .loading
+        if self.type == type {
+            self.state = .loaded
+        } else {
+            self.type = type
+            self.locationManager.startUpdatingLocation()
+            self.searchResults = []
+            self.state = .loading
+        }
 
     }
 
@@ -74,4 +77,12 @@ class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
 
 enum LoadableState {
     case idle, loading, failed, loaded
+}
+
+extension MKMapItem: Identifiable {
+    
+    public var id: MKMapItem {
+        self
+    }
+    
 }

@@ -17,7 +17,9 @@ var defaultCategories: [Category] = [
             "Resturants",
             "Food places"
         ],
-        color: .orange),
+        color: .orange,
+        image: .foodDrinkBackground
+    ),
     // Entertainment
     Category(
         icon: "star.fill",
@@ -26,7 +28,8 @@ var defaultCategories: [Category] = [
             "Entertainment",
             "Activities",
         ],
-        color: .red
+        color: .red,
+        image: .entertainmentBackground
     ),
     // Fitness
     Category(
@@ -37,6 +40,7 @@ var defaultCategories: [Category] = [
             "Outdoor Activities",
             "Fitness"
         ],
-        color: .green
+        color: .green,
+        image: .fitnessBackground
     ),
 ]

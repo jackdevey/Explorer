@@ -26,6 +26,11 @@
 		049FD4792A40EA8700C9AF4F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD4782A40EA8700C9AF4F /* Category.swift */; };
 		04C3439B2A75E7FF000E07F6 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */; };
 		04C3439D2A75E849000E07F6 /* ListTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C3439C2A75E849000E07F6 /* ListTypeView.swift */; };
+		04CC96422A78645E00E35146 /* HorizontalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC96412A78645E00E35146 /* HorizontalListView.swift */; };
+		04CC96442A7877FD00E35146 /* HorizontalScrollingGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC96432A7877FD00E35146 /* HorizontalScrollingGridView.swift */; };
+		04CC96462A7888C100E35146 /* NearbyLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC96452A7888C100E35146 /* NearbyLocationsView.swift */; };
+		04CC96482A79366300E35146 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC96472A79366300E35146 /* LocationDetailView.swift */; };
+		04CC964D2A79433000E35146 /* ScrollKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04CC964C2A79433000E35146 /* ScrollKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,10 @@
 		049FD4782A40EA8700C9AF4F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		04C3439C2A75E849000E07F6 /* ListTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTypeView.swift; sourceTree = "<group>"; };
+		04CC96412A78645E00E35146 /* HorizontalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalListView.swift; sourceTree = "<group>"; };
+		04CC96432A7877FD00E35146 /* HorizontalScrollingGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollingGridView.swift; sourceTree = "<group>"; };
+		04CC96452A7888C100E35146 /* NearbyLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyLocationsView.swift; sourceTree = "<group>"; };
+		04CC96472A79366300E35146 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CC964D2A79433000E35146 /* ScrollKit in Frameworks */,
 				0481D4F22A78388500B141D1 /* ScalingHeaderScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +150,7 @@
 		04983EBF2A3FB7F300E1F5EB /* Explorer */ = {
 			isa = PBXGroup;
 			children = (
+				04CC96402A78643D00E35146 /* General */,
 				0481D4E92A77F68000B141D1 /* Categories */,
 				0481D4E22A77D45F00B141D1 /* Explorer+ */,
 				04983EED2A3FCD0400E1F5EB /* Info.plist */,
@@ -153,6 +164,8 @@
 				04C3439A2A75E7FF000E07F6 /* LocationDelegate.swift */,
 				04C3439C2A75E849000E07F6 /* ListTypeView.swift */,
 				0481D4E02A77CC2C00B141D1 /* SettingsView.swift */,
+				04CC96452A7888C100E35146 /* NearbyLocationsView.swift */,
+				04CC96472A79366300E35146 /* LocationDetailView.swift */,
 			);
 			path = Explorer;
 			sourceTree = "<group>";
@@ -182,6 +195,15 @@
 			path = ExplorerUITests;
 			sourceTree = "<group>";
 		};
+		04CC96402A78643D00E35146 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				04CC96412A78645E00E35146 /* HorizontalListView.swift */,
+				04CC96432A7877FD00E35146 /* HorizontalScrollingGridView.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -200,6 +222,7 @@
 			name = Explorer;
 			packageProductDependencies = (
 				0481D4F12A78388500B141D1 /* ScalingHeaderScrollView */,
+				04CC964C2A79433000E35146 /* ScrollKit */,
 			);
 			productName = Explorer;
 			productReference = 04983EBD2A3FB7F300E1F5EB /* Explorer.app */;
@@ -275,6 +298,7 @@
 			mainGroup = 04983EB42A3FB7F300E1F5EB;
 			packageReferences = (
 				0481D4F02A78388400B141D1 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
+				04CC964B2A79433000E35146 /* XCRemoteSwiftPackageReference "ScrollKit" */,
 			);
 			productRefGroup = 04983EBE2A3FB7F300E1F5EB /* Products */;
 			projectDirPath = "";
@@ -318,16 +342,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CC96482A79366300E35146 /* LocationDetailView.swift in Sources */,
 				04983EC32A3FB7F300E1F5EB /* Item.swift in Sources */,
 				0481D4E12A77CC2C00B141D1 /* SettingsView.swift in Sources */,
 				0481D4E42A77D46C00B141D1 /* ExplorerPlusSubscriptionView.swift in Sources */,
 				04C3439D2A75E849000E07F6 /* ListTypeView.swift in Sources */,
 				0481D4E82A77EFB200B141D1 /* ExplorerPlusBenefitsView.swift in Sources */,
+				04CC96442A7877FD00E35146 /* HorizontalScrollingGridView.swift in Sources */,
 				0481D4ED2A78313800B141D1 /* CategoryLocationListView.swift in Sources */,
+				04CC96422A78645E00E35146 /* HorizontalListView.swift in Sources */,
 				0481D4E62A77DE1F00B141D1 /* PurchaseManager.swift in Sources */,
 				04C3439B2A75E7FF000E07F6 /* LocationDelegate.swift in Sources */,
 				049FD4792A40EA8700C9AF4F /* Category.swift in Sources */,
 				04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */,
+				04CC96462A7888C100E35146 /* NearbyLocationsView.swift in Sources */,
 				0481D4EB2A77F69700B141D1 /* DefaultCategories.swift in Sources */,
 				04983EC12A3FB7F300E1F5EB /* ExplorerApp.swift in Sources */,
 				04983EC52A3FB7F300E1F5EB /* ContentView.swift in Sources */,
@@ -711,6 +739,14 @@
 				minimumVersion = 0.2.0;
 			};
 		};
+		04CC964B2A79433000E35146 /* XCRemoteSwiftPackageReference "ScrollKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/ScrollKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -718,6 +754,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0481D4F02A78388400B141D1 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */;
 			productName = ScalingHeaderScrollView;
+		};
+		04CC964C2A79433000E35146 /* ScrollKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04CC964B2A79433000E35146 /* XCRemoteSwiftPackageReference "ScrollKit" */;
+			productName = ScrollKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
