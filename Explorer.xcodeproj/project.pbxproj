@@ -14,6 +14,7 @@
 		0481D4EB2A77F69700B141D1 /* DefaultCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4EA2A77F69700B141D1 /* DefaultCategories.swift */; };
 		0481D4ED2A78313800B141D1 /* CategoryLocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D4EC2A78313800B141D1 /* CategoryLocationListView.swift */; };
 		0481D4F22A78388500B141D1 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0481D4F12A78388500B141D1 /* ScalingHeaderScrollView */; };
+		0481F8D82A79BE8000A0675E /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481F8D72A79BE8000A0675E /* FeedbackManager.swift */; };
 		04983EC12A3FB7F300E1F5EB /* ExplorerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EC02A3FB7F300E1F5EB /* ExplorerApp.swift */; };
 		04983EC32A3FB7F300E1F5EB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EC22A3FB7F300E1F5EB /* Item.swift */; };
 		04983EC52A3FB7F300E1F5EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983EC42A3FB7F300E1F5EB /* ContentView.swift */; };
@@ -57,6 +58,7 @@
 		0481D4E72A77EFB200B141D1 /* ExplorerPlusBenefitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerPlusBenefitsView.swift; sourceTree = "<group>"; };
 		0481D4EA2A77F69700B141D1 /* DefaultCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategories.swift; sourceTree = "<group>"; };
 		0481D4EC2A78313800B141D1 /* CategoryLocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLocationListView.swift; sourceTree = "<group>"; };
+		0481F8D72A79BE8000A0675E /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
 		04983EBD2A3FB7F300E1F5EB /* Explorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Explorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04983EC02A3FB7F300E1F5EB /* ExplorerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerApp.swift; sourceTree = "<group>"; };
 		04983EC22A3FB7F300E1F5EB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				04CC96412A78645E00E35146 /* HorizontalListView.swift */,
 				04CC96432A7877FD00E35146 /* HorizontalScrollingGridView.swift */,
+				0481F8D72A79BE8000A0675E /* FeedbackManager.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				0481D4ED2A78313800B141D1 /* CategoryLocationListView.swift in Sources */,
 				04CC96422A78645E00E35146 /* HorizontalListView.swift in Sources */,
 				0481D4E62A77DE1F00B141D1 /* PurchaseManager.swift in Sources */,
+				0481F8D82A79BE8000A0675E /* FeedbackManager.swift in Sources */,
 				04C3439B2A75E7FF000E07F6 /* LocationDelegate.swift in Sources */,
 				049FD4792A40EA8700C9AF4F /* Category.swift in Sources */,
 				04983EEF2A3FCEA200E1F5EB /* LocationListView.swift in Sources */,
@@ -447,7 +451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -503,7 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -527,7 +531,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Explorer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Explorer;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To show nearby locations in app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -544,7 +548,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.jw3.Explorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -571,7 +575,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Explorer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Explorer;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To show nearby locations in app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -588,7 +592,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.jw3.Explorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

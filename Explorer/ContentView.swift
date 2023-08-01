@@ -76,7 +76,7 @@ struct ContentView: View {
                         HStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 8)
-                                    .fill(categoryIconColourPair(category: poiCategory).1.gradient)
+                                    .fill(categoryIconColourPair(category: poiCategory).1)
                                     .frame(width: 35, height: 35)
                                 Image(systemName: categoryIconColourPair(category: poiCategory).0)
                                     .foregroundStyle(.white)
@@ -179,10 +179,7 @@ struct ContentView: View {
             .sheet(isPresented: $isShowingExplorerPlusSubscriptionSheet) {
                 ExplorerPlusSubscriptionView()
             }
-            
-            .navigationDestination(for: MKMapItem.self) { location in
-                LocationDetailView(location: location)
-            }
+    
         }
     }
     

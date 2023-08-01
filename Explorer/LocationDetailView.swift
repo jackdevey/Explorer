@@ -12,7 +12,9 @@ import MapKit
 
 struct LocationDetailView: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var isPresented: Bool
+    
+    @State var iconTap: Bool = false
 
     @State
     private var offset = CGPoint.zero
@@ -20,6 +22,8 @@ struct LocationDetailView: View {
     @State var location: MKMapItem
     
     @State private var mapImage: UIImage? = UIImage(named: "placeholderImage")
+    
+    @State private var position: MapCameraPosition = .automatic
     
     @State
     private var visibleRatio = CGFloat.zero
@@ -47,72 +51,128 @@ struct LocationDetailView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        ZStack {
             ScrollView(.vertical) {
                 VStack(spacing: 0) {
-                    ScrollViewHeader {
-                        ZStack {
-                            // Background tint
-                            Rectangle()
-                                .fill(categoryIconColourPair(category: location.pointOfInterestCategory).1.gradient)
-                            
+                    ZStack {
+                        // Background tint
+                        Rectangle()
+                            .fill(categoryIconColourPair(category: location.pointOfInterestCategory).1)
+                        
+                        HStack {
                             VStack(alignment: .leading) {
-                                
                                 // Centered icon
-                                HStack {
-                                    Spacer()
-                                    Image(systemName: categoryIconColourPair(category: location.pointOfInterestCategory).0)
-                                        .font(.largeTitle)
-                                        .bold()
-                                    Spacer()
-                                }
-                                .padding(.top, 300)
-                                // Centered Title + Button
-                                HStack {
-                                    Spacer()
-                                    VStack {
-                                        Text(location.name ?? "Error")
-                                            .font(.title).bold()
-                                            .multilineTextAlignment(.center)
-                                        Button {
-                                            location.openInMaps()
-                                        } label: {
-                                            Label("Open in Maps", systemImage: "map.fill")
-                                                .font(.headline)
-                                        }
-                                        .buttonStyle(.borderedProminent)
-                                        .controlSize(.large)
-                                        .tint(.white)
-                                        .foregroundStyle(.black)
+                                Image(systemName: categoryIconColourPair(category: location.pointOfInterestCategory).0)
+                                    .symbolEffect(.bounce.down, value: iconTap)
+                                    .font(.title)
+                                    .bold()
+                                    .padding(.top, 20)
+                                    .padding(.bottom, 5)
+                                    .onTapGesture {
+                                        iconTap.toggle()
                                     }
-                                    Spacer()
+                                
+                                // Centered Title + Button
+                                Text(location.name ?? "Error")
+                                    .font(.title).bold()
+                                    .multilineTextAlignment(.leading)
+                                Button {
+                                    location.openInMaps()
+                                } label: {
+                                    Label("Open in Maps", systemImage: "map.fill")
+                                        .font(.headline)
                                 }
-                                .padding()
+                                .buttonStyle(.borderedProminent)
+                                .controlSize(.large)
+                                .tint(.white)
+                                .foregroundStyle(.black)
                             }
+                            Spacer()
                         }
+                        .padding()
                     }
                     
-                }
-            }
-            .navigationBarBackButtonHidden()
-            .toolbar {
-                // Circle clipped back button
-                ToolbarItem(placement: .navigation) {
-                    Button {
-                        self.presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Label("Back", systemImage: "chevron.down")
-                            .labelStyle(.iconOnly)
+                    VStack(alignment: .leading) {
+                        
+                        // Map section
+                        
+                        Text("Map")
+                            .font(.title2)
                             .bold()
+                        
+                        Map(position: $position, bounds: MapCameraBounds(minimumDistance: 200.0)) {
+                            Marker(location.name ?? "", coordinate: location.placemark.coordinate)
+                                .tint(categoryIconColourPair(category: location.pointOfInterestCategory).1)
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 11))
+                        .frame(height: 250)
+                        
+                        Divider()
+                            .padding(.top, 5)
+                            .padding(.bottom, 10)
+                        
+                        // Show phone number
+                        if let phoneNumber = location.phoneNumber {
+                            HStack {
+                                Text("Phone Number")
+                                Spacer()
+                                Text(phoneNumber)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        
+                        if location.phoneNumber != nil && location.url != nil {
+                            Divider()
+                                .padding(.top, 5)
+                                .padding(.bottom, 10)
+                        }
+                        
+                        // Show URL
+                        if let url = location.url {
+                            HStack {
+                                Text("Website")
+                                Spacer()
+                                Link(destination: url) {
+                                    Label("Open Link", systemImage: "arrow.up.forward.app")
+                                }
+                            }
+                        }
+                        
                     }
-                    .buttonStyle(.bordered)
-                    .clipShape(Circle())
-                    .tint(.white)
+                    .padding()
+                
                 }
             }
+            
+            self.topButtons
+        }
+    }
+    
+    
+    var topButtons: some View {
+        VStack {
+            HStack {
+                Spacer()
+                // Close button
+                Button {
+                    isPresented.toggle()
+                } label: {
+                    Label("Back", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                        .bold()
+                }
+                .buttonStyle(.bordered)
+                .clipShape(Circle())
+                .foregroundStyle(.white)
+                .padding(.top)
+                .padding(.trailing, 10)
+            }
+            Spacer()
         }
     }
 }
+
+
 
 //struct LocationDetailView: View {
 //    

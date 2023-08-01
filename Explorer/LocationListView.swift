@@ -14,11 +14,16 @@ struct LocationListView: View {
     
     @State var isPresented: Bool = false
     
+    @EnvironmentObject var feedbackManager: FeedbackManager
+    
     var body: some View {
-            HStack {
+        Button {
+            isPresented.toggle()
+        } label: {
+            HStack(alignment: .center) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(categoryIconColourPair(category: location.pointOfInterestCategory).1.gradient)
+                        .fill(categoryIconColourPair(category: location.pointOfInterestCategory).1)
                         .frame(width: 35, height: 35)
                     Image(systemName: categoryIconColourPair(category: location.pointOfInterestCategory).0)
                         .foregroundStyle(.white)
@@ -32,139 +37,149 @@ struct LocationListView: View {
                         .lineLimit(1)
                 }
                 .padding([.leading, .trailing], 5)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(.secondary)
             }
-            .onTapGesture {
-                isPresented.toggle()
-            }
-            .sheet(isPresented: $isPresented) {
-                LocationDetailView(location: location)
+            .tint(.primary)
+        }
+        .sheet(isPresented: $isPresented) {
+            LocationDetailView(isPresented: $isPresented, location: location)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
+        .onChange(of: isPresented) { hidden, showing in
+            if showing {
+                feedbackManager.soft()
+            } else {
+                feedbackManager.medium()
             }
         }
-    
+    }
 }
 
 func categoryIconColourPair(category: MKPointOfInterestCategory?) -> (String, Color) {
     switch(category) {
         
     case MKPointOfInterestCategory.airport:
-        return ("airplane.departure", .blue)
+        return ("airplane.departure", .customBlue)
         
     case MKPointOfInterestCategory.amusementPark:
-        return ("star", .pink)
+        return ("star.fill", .customPink)
         
     case MKPointOfInterestCategory.aquarium:
-        return ("fish.fill", .blue)
+        return ("fish.fill", .customBlue)
         
     case MKPointOfInterestCategory.atm:
-        return ("sterlingsign.square", .green)
+        return ("sterlingsign.square", .customGreen)
         
     case MKPointOfInterestCategory.bakery:
         return ("birthday.cake", .brown)
         
     case MKPointOfInterestCategory.bank:
-        return ("building.columns.fill", .green)
+        return ("building.columns.fill", .customGreen)
         
     case MKPointOfInterestCategory.beach:
-        return ("beach.umbrella.fill", .yellow)
+        return ("beach.umbrella.fill", .customYellow)
         
     case MKPointOfInterestCategory.brewery:
         return ("wineglass", .brown)
         
     case MKPointOfInterestCategory.cafe:
-        return ("cup.and.saucer.fill", .yellow)
+        return ("cup.and.saucer.fill", .customYellow)
         
     case MKPointOfInterestCategory.campground:
-        return ("campground", .green)
+        return ("campground", .customGreen)
         
     case MKPointOfInterestCategory.carRental:
-        return ("car.circle.fill", .purple)
+        return ("car.circle.fill", .customPurple)
         
     case MKPointOfInterestCategory.evCharger:
-        return ("bolt.fill.batteryblock", .green)
+        return ("bolt.fill.batteryblock", .customGreen)
         
     case MKPointOfInterestCategory.fireStation:
-        return ("flame.fill", .red)
+        return ("flame.fill", .customRed)
         
     case MKPointOfInterestCategory.fitnessCenter:
-        return ("figure.run", .teal)
+        return ("figure.run", .customBlue)
         
     case MKPointOfInterestCategory.foodMarket:
-        return ("cart.fill", .orange)
+        return ("cart.fill", .customOrange)
         
     case MKPointOfInterestCategory.gasStation:
-        return ("fuelpump.fill", .orange)
+        return ("fuelpump.fill", .customOrange)
         
     case MKPointOfInterestCategory.hospital:
-        return ("cross.fill", .red)
+        return ("cross.fill", .customRed)
         
     case MKPointOfInterestCategory.hotel:
-        return ("bed.double.fill", .red)
+        return ("bed.double.fill", .customPurple)
         
     case MKPointOfInterestCategory.laundry:
-        return ("house.fill", .blue)
+        return ("house.fill", .customBlue)
         
     case MKPointOfInterestCategory.library:
-        return ("book.fill", .blue)
+        return ("book.fill", .customBlue)
         
     case MKPointOfInterestCategory.marina:
-        return ("boat.fill", .blue)
+        return ("boat.fill", .customBlue)
         
     case MKPointOfInterestCategory.movieTheater:
-        return ("popcorn.fill", .red)
+        return ("popcorn.fill", .customRed)
         
     case MKPointOfInterestCategory.museum:
-        return ("museum.fill", .purple)
+        return ("museum.fill", .customPurple)
         
     case MKPointOfInterestCategory.nationalPark:
-        return ("mountain.2.fill", .green)
+        return ("mountain.2.fill", .customGreen)
         
     case MKPointOfInterestCategory.nightlife:
         return ("moon.stars.fill", .brown)
         
     case MKPointOfInterestCategory.park:
-        return ("tree.fill", .green)
+        return ("tree.fill", .customGreen)
         
     case MKPointOfInterestCategory.parking:
-        return ("car.fill", .blue)
+        return ("car.fill", .customBlue)
         
     case MKPointOfInterestCategory.pharmacy:
-        return ("cross.circle.fill", .green)
+        return ("cross.circle.fill", .customGreen)
         
     case MKPointOfInterestCategory.police:
-        return ("lock.fill", .blue)
+        return ("lock.fill", .customBlue)
         
     case MKPointOfInterestCategory.postOffice:
-        return ("envelope.fill", .blue)
+        return ("envelope.fill", .customBlue)
         
     case MKPointOfInterestCategory.publicTransport:
-        return ("bus.fill", .purple)
+        return ("bus.fill", .customPurple)
         
     case MKPointOfInterestCategory.restaurant:
-        return ("fork.knife", .orange)
+        return ("fork.knife", .customOrange)
         
     case MKPointOfInterestCategory.restroom:
-        return ("wand.and.stars.inverse", .blue)
+        return ("wand.and.stars.inverse", .customBlue)
         
     case MKPointOfInterestCategory.school:
-        return ("graduationcap.fill", .yellow)
+        return ("graduationcap.fill", .customYellow)
         
     case MKPointOfInterestCategory.stadium:
-        return ("sportscourt.fill", .blue)
+        return ("sportscourt.fill", .customBlue)
         
     case MKPointOfInterestCategory.store:
-        return ("bag.fill", .purple)
+        return ("bag.fill", .customPurple)
         
     case MKPointOfInterestCategory.theater:
-        return ("ticket.fill", .red)
+        return ("ticket.fill", .customRed)
         
     case MKPointOfInterestCategory.university:
-        return ("graduationcap.fill", .purple)
+        return ("graduationcap.fill", .customPurple)
         
     case MKPointOfInterestCategory.winery:
         return ("winebottle.fill", .brown)
         
     case MKPointOfInterestCategory.zoo:
-        return ("tortoise.fill", .green)
+        return ("tortoise.fill", .customGreen)
         
     default:
         return ("questionmark", .gray)

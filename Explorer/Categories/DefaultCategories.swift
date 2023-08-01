@@ -14,7 +14,6 @@ var defaultCategories: [Category] = [
         name: "Food & Drink",
         searchTerms: [
             "Food & Drink",
-            "Resturants",
             "Food places"
         ],
         color: .orange,
@@ -25,8 +24,7 @@ var defaultCategories: [Category] = [
         icon: "star.fill",
         name: "Entertainment",
         searchTerms: [
-            "Entertainment",
-            "Activities",
+            "Entertainment"
         ],
         color: .red,
         image: .entertainmentBackground
